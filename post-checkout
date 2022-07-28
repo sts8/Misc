@@ -1,0 +1,30 @@
+#!/bin/sh
+#
+# This file: ~/.git/hooks/post-checkout
+# 
+# git config --global core.hooksPath ~/.git/hooks
+
+echo ""
+echo "----- git identity script -----"
+
+remoteurl="$(git config --get remote.origin.url)"
+
+if [[ $remoteurl = https://github.com/* ]]
+then
+    echo "GitHub detected!"
+    git config user.name "sts8"
+    git config user.email "104705788+sts8@users.noreply.github.com"
+fi
+
+if [[ $remoteurl = https://git.fim.uni-passau.de/* ]]
+then
+    echo "FIM Git detected!"
+    git config user.name "Siegfried Steckenbiller"
+    git config user.email "steckenbiller@fim.uni-passau.de"
+fi
+
+echo ""
+echo "identity is now:"
+git config user.name
+git config user.email
+echo "----- git identity script -----"
